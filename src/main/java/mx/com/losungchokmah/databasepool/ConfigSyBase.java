@@ -19,7 +19,6 @@
  */
 
 package mx.com.losungchokmah.databasepool;
-import java.io.InputStream;
 import java.util.Properties;
 
 /*
@@ -83,18 +82,7 @@ public class ConfigSyBase implements BackEndConfiguration, SyBaseConfiguration {
      * @throws Exception 
      */
 
-    public ConfigSyBase(String archivoProperties) throws Exception {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream input = classLoader.getResourceAsStream("SyBase.properties");
-        Properties properties = new Properties();
-
-        try {
-            properties.load(input);
-        } catch (Exception ex) {
-            properties = null;
-            throw new Exception("Error, no se pudieron teer las propiedades");
-        }
-        
+    public ConfigSyBase(Properties properties ) throws Exception {
         this.setApplicationName(properties.getProperty("dataSource.ApplicationName"));
         this.setDbName(properties.getProperty("dataSource.databaseName"));
         this.setDbHost(properties.getProperty("dataSource.serverName"));
